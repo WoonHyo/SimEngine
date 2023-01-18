@@ -1,11 +1,21 @@
-# This is a sample Python script.
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
+from server.singleserver import SingleServer
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    tset = 2
+    what = input("How many run your server?: ")
+    need = int(input("Need event scheduler? (Yes:1, No:0"))
+    n_of_server = int(what)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    for i in range(n_of_server):
+        globals()["server{}".format(i+1)] = SingleServer(20.0)
+
+    for i in range(n_of_server):
+        a = eval('server{}'.format(i+1))
+        while a.isEoS() is True:
+            a.UpdateEvent()
+        print("Server{} Information".format(i+1))
+        a.execute_stat()
