@@ -16,6 +16,9 @@ class SingleServer:
         self.now = 0
         self.P = 0
 
+    def get_q_length(self):
+        return self.Q
+
     def UpdateEvent(self):
         self.event_scheduler.sort()
         #print("#", self.now, "event scheduler: ", self.event_scheduler)
@@ -76,7 +79,7 @@ class SingleServer:
         a = self.now + np.round(np.random.exponential(5) / 10, 2)
         self.event_scheduler.append([a, "arr"])
         self.store.append([a, "arr"])
-        if (self.M == 0):
+        if self.M == 0:
             self.event_scheduler.append([self.now, "load"])
             self.store.append([self.now, "load"])
 
@@ -126,7 +129,7 @@ class SingleServer:
         self.M -= 1
         self.P += 1
 
-        if (self.Q > 0):
+        if self.Q > 0:
             self.event_scheduler.append([self.now, "load"])
             self.store.append([self.now, "load"])
 
@@ -138,7 +141,7 @@ class SingleServer:
     def execute_stat(self):
         self.sumQ = self.sumQ + self.Q * (self.now - self.before)
         AQL = self.sumQ / self.now
-        print("sumQ={}, AQL={}, 생산량 P={}".format(self.sumQ, AQL, self.P))
+        print("sumQ={}, AQL={}, P={}".format(self.sumQ, AQL, self.P))
 
         # 기계상태 출력
         import pandas as pd
