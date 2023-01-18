@@ -1,6 +1,7 @@
 class SingleServer:
-    def __init__(self, eos):
+    def __init__(self, eos, need):
         self.Eos = eos
+        self.need = need
 
         self.event_scheduler = []
         self.store = []
@@ -157,6 +158,10 @@ class SingleServer:
         plt.show()
 
         # 저장
-        store2 = pd.DataFrame(self.store, columns=["Time", "Type"])
-        #print('Event Calender')
-        return store2
+
+        if self.need == 1:
+            store2 = pd.DataFrame(self.store, columns=["Time", "Type"])
+            print("Event Schedule")
+            print(store2)
+
+        #return store2
