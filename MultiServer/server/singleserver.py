@@ -51,7 +51,7 @@ class SingleServer:
             self.now = 1
             return True
         else:
-            if self.now == 20:
+            if self.now == self.Eos:
                 return False
             else:
                 self.now += 1
